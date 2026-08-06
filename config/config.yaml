@@ -1,0 +1,124 @@
+# SecureAI Config
+app:
+  name: "SecureAI"
+  version: "0.1.0"
+  debug: false
+
+# Database connections (local Docker)
+database:
+  postgres:
+    host: "localhost"
+    port: 5432
+    name: "secureai"
+    user: "secureai"
+    password: "secureai_local"
+  neo4j:
+    uri: "bolt://localhost:7687"
+    user: "neo4j"
+    password: "secureai_neo4j"
+  redis:
+    host: "localhost"
+    port: 6379
+
+# Vector Store
+vector_store:
+  qdrant:
+    host: "localhost"
+    port: 6333
+    collections:
+      code_functions: "code_functions"
+      vuln_patterns: "vuln_patterns"
+      fix_patterns: "fix_patterns"
+      cve_descriptions: "cve_descriptions"
+  embedding_dim: 768
+  hnsw:
+    m: 16
+    ef_construction: 200
+
+# ML Models
+models:
+  # Embedding model for code similarity
+  embedding:
+    base_model: "microsoft/graphcodebert-base"
+    checkpoint_path: "checkpoints/embedding_model"
+    batch_size: 32
+    max_length: 512
+    device: "mps"   # Mac M1/M2/M3 GPU via Metal Performance Shaders
+
+  # Vulnerability classifier
+  classifier:
+    base_model: "microsoft/graphcodebert-base"
+    checkpoint_path: "checkpoints/classifier"
+    num_cwe_classes: 26     # 25 CWE types + 1 binary
+    batch_size: 16
+    max_length: 512
+    device: "mps"
+
+  # Fix generator (code LLM)
+  fix_generator:
+    base_model: "bigcode/starcoderbase-1b"   # 1B params - fits on M1 Pro 16GB
+    checkpoint_path: "checkpoints/fix_generator"
+    max_new_tokens: 512
+    temperature: 0.2
+    top_p: 0.95
+    device: "mps"
+
+  # Reward model for RLHF
+  reward_model:
+    base_model: "microsoft/graphcodebert-base"
+    checkpoint_path: "checkpoints/reward_model"
+    device: "mps"
+
+# Analysis Engine
+analysis:
+  supported_languages:
+    - python
+    - javascript
+  taint:
+    max_depth: 20
+    interprocedural: true
+    max_call_depth: 5
+  patterns:
+    rules_dir: "core/pattern_db/rules"
+  chunk_size: 50          # lines per code chunk for analysis
+  chunk_overlap: 10
+
+# Data Pipeline
+data:
+  bigvul:
+    url: "https://drive.google.com/file/d/1-0VhnHBp9IGh90s2wCNjeCMuy70HPl8X"
+    processed_path: "data/processed/bigvul"
+  cvefixes:
+    url: "https://zenodo.org/record/7029359"
+    processed_path: "data/processed/cvefixes"
+  devign:
+    url: "https://sites.google.com/view/devign"
+    processed_path: "data/processed/devign"
+  train_split: 0.80
+  val_split: 0.10
+  test_split: 0.10
+
+# API
+api:
+  host: "0.0.0.0"
+  port: 8000
+  workers: 4
+  rate_limit: 100   # req/min per client
+
+# Celery
+celery:
+  broker: "redis://localhost:6379/0"
+  backend: "redis://localhost:6379/1"
+  max_workers: 4
+
+# Logging
+logging:
+  level: "INFO"
+  format: "{time} | {level} | {module} | {message}"
+  file: "logs/secureai.log"
+
+# NVD API (free, no key needed for basic access)
+nvd:
+  base_url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+  results_per_page: 2000
+  sync_interval_hours: 6

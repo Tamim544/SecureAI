@@ -1,0 +1,54 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+.env
+.venv
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# ML / Data
+*.pt
+*.pth
+*.bin
+*.safetensors
+*.onnx
+data/raw/
+data/processed/
+checkpoints/
+mlruns/
+wandb/
+
+# Secrets & Config
+.env
+.env.local
+secrets.yaml
+*.key
+
+# IDE
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker volumes
+docker/volumes/
+
+# Logs
+logs/
+*.log
+
+# Node (VS Code extension)
+node_modules/
+dist/
+*.vsix

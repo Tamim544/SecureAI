@@ -34,6 +34,7 @@ help:
 	@echo ""
 	@echo "  Running:"
 	@echo "    api              Start the REST API server"
+	@echo "    web              Start the Next.js Dashboard"
 	@echo "    scan             Quick scan (usage: make scan TARGET=./my_repo)"
 	@echo ""
 	@echo "  Development:"
@@ -112,6 +113,10 @@ api:
 	@echo "Starting SecureAI REST API on http://localhost:8000"
 	@echo "API docs: http://localhost:8000/docs"
 	python -m uvicorn api.rest.app:app --host 0.0.0.0 --port 8000 --reload
+
+web:
+	@echo "Starting SecureAI Web Dashboard on http://localhost:3000"
+	cd interfaces/web_dashboard && npm run dev
 
 scan:
 	@[ "$(TARGET)" ] || ( echo "Usage: make scan TARGET=./path/to/repo"; exit 1 )

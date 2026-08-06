@@ -1,0 +1,21 @@
+id: sqli-python-fstring
+name: SQL Injection via f-string
+cwe: CWE-89
+severity: CRITICAL
+language: python
+description: User-controlled input flows into a SQL query via f-string concatenation.
+pattern:
+  - type: regex
+    match: 'execute\s*\(\s*f["''][^"''\n]*\{.*?\}[^"''\n]*["'']\s*\)'
+fix_template: "Use parameterized queries: cursor.execute('SELECT * FROM t WHERE id = %s', (user_id,))"
+---
+id: xss-python-render
+name: Cross-Site Scripting (XSS)
+cwe: CWE-79
+severity: HIGH
+language: python
+description: User input rendered without escaping in HTML.
+pattern:
+  - type: regex
+    match: 'return\s+f["''][^"''\n]*<\w+>.*\{request\..*?\}.*</\w+>[^"''\n]*["'']'
+fix_template: "Escape HTML output or use a template engine that auto-escapes."

@@ -138,6 +138,14 @@ class SearchResult(BaseModel):
     vulnerability_match: str | None
 
 
+class CVEResponse(BaseModel):
+    cve_id: str
+    description: str
+    published_date: str | None
+    cvss_score: float | None
+    cwe_nodes: list[str] = []
+
+
 # ──────────────────────────────────────────────
 # Dependency Injection
 # ──────────────────────────────────────────────
@@ -371,6 +379,31 @@ async def semantic_search(
         language=request.language,
     )
     return results
+
+
+@app.get(
+    "/api/v1/cve/{cve_id}",
+    response_model=CVEResponse,
+    tags=["Knowledge Base"],
+    summary="Get detailed information about a specific CVE",
+)
+async def get_cve_details(cve_id: str):
+    """
+    Fetch details for a specific CVE from the Neo4j Knowledge Graph.
+    Includes CVSS scores, descriptions, and linked CWE taxonomy.
+    """
+    # Placeholder for Neo4j lookup (will connect to NVDSyncEngine / Knowledge Base later)
+    # In a full implementation, we would query the Neo4j driver here.
+    if not cve_id.startswith("CVE-"):
+        raise HTTPException(status_code=400, detail="Invalid CVE ID format. Must start with 'CVE-'")
+        
+    return CVEResponse(
+        cve_id=cve_id.upper(),
+        description="Placeholder description for the requested CVE. Data is synced from NVD.",
+        published_date="2024-01-01",
+        cvss_score=7.5,
+        cwe_nodes=["CWE-89"]
+    )
 
 
 @app.exception_handler(Exception)

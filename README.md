@@ -1,9 +1,9 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/lucide-icons/lucide/main/icons/shield-alert.svg" width="120" alt="SecureAI Logo" />
   <h1>SecureAI Platform</h1>
-  <p><strong>Enterprise-Grade Autonomous Vulnerability Detection & Remediation System</strong></p>
+  <p><strong>A Full-Stack AI Security Platform for Modern Engineering Teams</strong></p>
   <p>
-    Powered by <strong>Graph Neural Networks</strong>, <strong>RLHF</strong>, and a <strong>Semantic Knowledge Graph</strong>
+    Built with <strong>Next.js 15 & 3D WebGL</strong> • Powered by <strong>FastAPI, Graph Neural Networks, and RAG</strong>
   </p>
   
   <p>
@@ -17,9 +17,11 @@
 ---
 
 ## 🎯 Executive Summary
-SecureAI is an advanced, AI-driven static application security testing (SAST) platform. Unlike traditional regex-based scanners, SecureAI deeply understands code semantics by compiling source code into **Code Property Graphs (CPGs)** and analyzing them using a hybrid **GraphCodeBERT + GATv2Conv** model. 
+SecureAI is a comprehensive, end-to-end static application security testing (SAST) platform that demonstrates advanced **Full-Stack Engineering** combined with cutting-edge **Machine Learning**. 
 
-When vulnerabilities are detected, SecureAI leverages an **RLHF-aligned LLM** (Direct Preference Optimization on StarCoder) to autonomously generate compilable, security-correct patches, effectively shifting security left without slowing down developer velocity.
+As a **Front-End / Full-Stack Developer**, I built this project to showcase how modern web technologies (Next.js 15, Framer Motion, React Three Fiber) can seamlessly integrate with highly complex backend AI systems (FastAPI, Neo4j, Qdrant).
+
+Unlike traditional scanners, SecureAI deeply understands code semantics. It compiles source code into **Code Property Graphs (CPGs)** and analyzes them using a hybrid **GraphCodeBERT + GATv2Conv** model. When vulnerabilities are detected, a **Retrieval-Augmented Generation (RAG)** pipeline backed by a semantic knowledge graph contextualizes the flaw, and an **RLHF-aligned LLM** autonomously generates a secure, compilable patch. This brings enterprise-grade security left without slowing down developer velocity.
 
 ---
 

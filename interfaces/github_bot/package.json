@@ -1,0 +1,21 @@
+{
+  "name": "secureai-github-bot",
+  "version": "1.0.0",
+  "description": "A GitHub App built with Probot that runs SecureAI scans on Pull Requests.",
+  "main": "index.js",
+  "scripts": {
+    "start": "probot run ./index.js",
+    "dev": "nodemon --exec \"npm start\""
+  },
+  "dependencies": {
+    "probot": "^12.2.0",
+    "axios": "^1.5.0",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  },
+  "engines": {
+    "node": ">= 16"
+  }
+}

@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0a0a0c;
+  --color-foreground: #e2e8f0;
+  
+  --color-primary: #3b82f6;
+  --color-primary-foreground: #ffffff;
+  
+  --color-secondary: #1e293b;
+  --color-secondary-foreground: #f8fafc;
+  
+  --color-muted: #0f172a;
+  --color-muted-foreground: #64748b;
+  
+  --color-accent: #8b5cf6;
+  --color-accent-foreground: #ffffff;
+  
+  --color-destructive: #ef4444;
+  --color-destructive-foreground: #f8fafc;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+
+  --color-border: #1e293b;
+  --color-input: #1e293b;
+  --color-ring: #3b82f6;
+}
+
+@layer base {
+  :root {
+    --background: #0a0a0c;
+    --foreground: #e2e8f0;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    background-image: 
+      radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+      radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
+    background-attachment: fixed;
+  }
+}
+
+/* Glassmorphism Utilities */
+.glass {
+  @apply bg-white/5 backdrop-blur-lg border border-white/10 shadow-xl;
+}
+
+.glass-card {
+  @apply bg-secondary/30 backdrop-blur-md border border-white/5 rounded-2xl shadow-lg;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-white/10 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-white/20;
+}

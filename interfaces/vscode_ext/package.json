@@ -1,0 +1,58 @@
+{
+  "name": "secureai-vscode",
+  "displayName": "SecureAI",
+  "description": "AI-powered vulnerability detection and fix generation for VS Code.",
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Machine Learning"
+  ],
+  "activationEvents": [
+    "onLanguage:python",
+    "onLanguage:javascript",
+    "onLanguage:typescript"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "secureai.scanFile",
+        "title": "SecureAI: Scan Current File"
+      },
+      {
+        "command": "secureai.generateFix",
+        "title": "SecureAI: Generate Fix for Vulnerability"
+      }
+    ],
+    "configuration": {
+      "title": "SecureAI",
+      "properties": {
+        "secureai.apiUrl": {
+          "type": "string",
+          "default": "http://localhost:8000",
+          "description": "URL of the local SecureAI FastAPI server"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts"
+  },
+  "devDependencies": {
+    "@types/node": "16.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
+    "eslint": "^8.49.0",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "axios": "^1.5.0"
+  }
+}
